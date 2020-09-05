@@ -1,4 +1,6 @@
-# GitHub Action to Analyse Sentiments in Issues and Pull Request to Identify Emotions that Need to be Checked Agains the Code of Conduct.'
+# Code of Conduct Compliance Through Sentiments Analysis
+
+Use this action to analyze sentiments in issues and pull request to identify emotions that need to be checked against the Code of Conduct
 
 //TODO
 
