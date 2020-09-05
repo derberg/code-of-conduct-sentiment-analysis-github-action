@@ -1,6 +1,6 @@
 {
   "name": "code-of-conduct-sentiment-analysis-github-action",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Use this action to analyze sentiments in issues and pull request to identify emotions that need to be checked against the Code of Conduct",
   "main": "dist/index.js",
   "scripts": {
