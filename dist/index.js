@@ -7,7 +7,7 @@ module.exports =
 
 const core = __webpack_require__(186);
 const eventPayload = require(process.env.GITHUB_EVENT_PATH);
-const eventName = require(process.env.GITHUB_EVENT_NAME);
+const eventName = process.env.GITHUB_EVENT_NAME;
 
 async function run() {
   core.debug(eventName, eventPayload);
