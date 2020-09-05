@@ -1,0 +1,72 @@
+{
+  "name": "code-of-conduct-sentiment-analysis-github-action",
+  "version": "0.0.1",
+  "description": "Use this action to analyze sentiments in issues and pull request to identify negative emotions that need to be checked against the Code of Conduct",
+  "main": "dist/index.js",
+  "scripts": {
+    "release": "semantic-release",
+    "get-version": "echo $npm_package_version",
+    "lint": "eslint --config .eslintrc lib",
+    "package": "npm run test && ncc build lib/index.js -o dist",
+    "test": "npm run eslint && jest",
+    "start": "node lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derberg/code-of-conduct-sentiment-analysis-github-action.git"
+  },
+  "author": "Lukasz Gornicki <lpgornicki@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/derberg/code-of-conduct-sentiment-analysis-github-action/issues"
+  },
+  "homepage": "https://github.com/derberg/code-of-conduct-sentiment-analysis-github-action#readme",
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/github": "^7.0.4",
+    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "@vercel/ncc": "^0.24.0",
+    "conventional-changelog-conventionalcommits": "^4.2.3",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "husky": "^4.2.3",
+    "semantic-release": "^17.0.4"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "jest": "^24.9.0"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run package"
+    }
+  }
+}

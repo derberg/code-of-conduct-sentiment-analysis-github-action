@@ -1,0 +1,13 @@
+name: 'Code of conduct compliance through sentiments analysis'
+description: 'Use this action to analyse sentiments in issues and pull request to identify negative emotions that need to be checked agains the Code of Conduct.'
+outputs:
+  sentiment:
+    description: 'Information about the sentiment of information. It is up to you to decide weather the score is to low or it is fine.'
+  source:
+    description: 'Link to the resource that was evaluated.'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'bell'
+  color: red

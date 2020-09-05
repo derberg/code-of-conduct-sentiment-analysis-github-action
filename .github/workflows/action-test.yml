@@ -1,0 +1,30 @@
+name: 'testing workflow'
+# Trigger on release
+on: 
+  issue_comment:
+    types: 
+      - created
+      - edited
+  issues:
+    types:
+      - opened
+      - edited
+  pull_request:
+    types:
+      - opened
+      - edited
+  pull_request_review:
+    types:
+      - submitted
+      - edited
+  pull_request_review_comment:
+    types:
+      - created
+      - edited
+jobs:
+  test:
+    name: Checking sentiments
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
