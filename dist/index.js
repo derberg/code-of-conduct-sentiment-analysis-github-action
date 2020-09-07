@@ -19,8 +19,8 @@ async function run() {
     url = eventPayload.issue.html_url;
     console.log(content, url);  
     break;
-  case 'issue_comment' || 0:
-    console.log(eventPayload);
+  case 'issue_comment':
+  case 'pull_request_review_comment':
     content = eventPayload.comment.body;
     url = eventPayload.comment.html_url;
     console.log(content, url);  
