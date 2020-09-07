@@ -12,11 +12,20 @@ const eventName = process.env.GITHUB_EVENT_NAME;
 async function run() {
   switch (eventName) {
   case 'issues':
-    console.log('event payload', eventPayload);  
+    const content = eventPayload.issue.body;
+    console.log(content);  
     break;
   case 'issue_comment':
+    console.log(eventPayload);  
     break;
   case 'pull_request':
+    console.log(eventPayload);  
+    break;
+  case 'pull_request_review':
+    console.log(eventPayload);  
+    break;
+  case 'pull_request_review_comment':
+    console.log(eventPayload);  
     break;
   default:
     break;
