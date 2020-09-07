@@ -9,7 +9,8 @@
     "lint": "eslint --config .eslintrc lib",
     "package": "npm run test && ncc build lib/index.js -o dist",
     "test": "npm run lint && jest",
-    "start": "node lib/index.js"
+    "start": "node lib/index.js",
+    "gitAdd": "git add dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^24.0.0",
     "eslint-plugin-sonarjs": "^0.5.0",
-    "husky": "^4.2.3",
+    "pre-commit": "^1.2.2",
     "semantic-release": "^17.0.4"
   },
   "dependencies": {
@@ -64,9 +65,8 @@
       "@semantic-release/github"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run package"
-    }
-  }
+  "pre-commit": [
+    "package",
+    "gitAdd"
+  ]
 }
