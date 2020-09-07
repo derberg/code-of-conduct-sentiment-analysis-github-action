@@ -29,7 +29,7 @@ async function run() {
     break;
   case 'pull_request_review':
     content = eventPayload.review.body;
-    url = eventPayload.comment.html_url;
+    url = eventPayload.review.html_url;
     console.log(content, url);
     break;
   default:
