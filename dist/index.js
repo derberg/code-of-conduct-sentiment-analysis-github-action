@@ -10,6 +10,8 @@ const eventPayload = require(process.env.GITHUB_EVENT_PATH);
 const eventName = process.env.GITHUB_EVENT_NAME;
 let content, url;
 
+//todo always check if null or not and analyze not null only
+
 async function run() {
   switch (eventName) {
   case 'issues':
@@ -18,6 +20,7 @@ async function run() {
     console.log(content, url);  
     break;
   case 'issue_comment' || 0:
+    console.log(eventPayload);
     content = eventPayload.comment.body;
     url = eventPayload.comment.html_url;
     console.log(content, url);  
@@ -30,7 +33,7 @@ async function run() {
   case 'pull_request_review':
     content = eventPayload.review.body;
     url = eventPayload.review.html_url;
-    console.log(content, url, eventPayload);
+    console.log(content, url);
     break;
   default:
     break;
