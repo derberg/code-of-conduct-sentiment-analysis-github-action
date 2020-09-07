@@ -30,7 +30,7 @@ async function run() {
   case 'pull_request_review':
     content = eventPayload.review.body;
     url = eventPayload.review.html_url;
-    console.log(content, url);
+    console.log(content, url, eventPayload);
     break;
   default:
     break;
