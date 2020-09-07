@@ -8,24 +8,29 @@ module.exports =
 const core = __webpack_require__(186);
 const eventPayload = require(process.env.GITHUB_EVENT_PATH);
 const eventName = process.env.GITHUB_EVENT_NAME;
+let content, url;
 
 async function run() {
   switch (eventName) {
   case 'issues':
-    const content = eventPayload.issue.body;
-    console.log(content);  
+    content = eventPayload.issue.body;
+    url = eventPayload.issue.html_url;
+    console.log(content, url);  
     break;
-  case 'issue_comment':
-    console.log(eventPayload);  
+  case 'issue_comment' || 0:
+    content = eventPayload.comment.body;
+    url = eventPayload.comment.html_url;
+    console.log(content, url);  
     break;
   case 'pull_request':
-    console.log(eventPayload);  
+    content = eventPayload.pull_request.body;
+    url = eventPayload.pull_request.html_url;
+    console.log(content, url);  
     break;
   case 'pull_request_review':
-    console.log(eventPayload);  
-    break;
-  case 'pull_request_review_comment':
-    console.log(eventPayload);  
+    content = eventPayload.review.body;
+    url = eventPayload.comment.html_url;
+    console.log(content, url);
     break;
   default:
     break;
