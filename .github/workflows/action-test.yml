@@ -30,6 +30,8 @@ jobs:
       - name: Check sentiment
         uses: ./
         id: sentiments
+        with:
+          gcp_key: ${{ secrets.GCP_KEY }} 
       - name: Echo sentiment
         run: > 
           echo 'Sentiment: ${{steps.sentiments.outputs.sentiment}}'

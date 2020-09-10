@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.3",
+    "axios": "^0.20.0",
     "jest": "^24.9.0",
     "sentiment": "^5.0.2"
   },
