@@ -20,24 +20,24 @@ async function run() {
   case 'issues':
     content = eventPayload.issue.body;
     url = eventPayload.issue.html_url;
-    result = content && analyzeSentiments(content, gcp_key);
+    result = content && await analyzeSentiments(content, gcp_key);
 
     break;
   case 'issue_comment':
   case 'pull_request_review_comment':
     content = eventPayload.comment.body;
     url = eventPayload.comment.html_url;
-    result = content && analyzeSentiments(content, gcp_key);
+    result = content && await analyzeSentiments(content, gcp_key);
     break;
   case 'pull_request':
     content = eventPayload.pull_request.body;
     url = eventPayload.pull_request.html_url;
-    result = content && analyzeSentiments(content, gcp_key);
+    result = content && await analyzeSentiments(content, gcp_key);
     break;
   case 'pull_request_review':
     content = eventPayload.review.body;
     url = eventPayload.review.html_url;
-    result = content && analyzeSentiments(content, gcp_key);
+    result = content && await analyzeSentiments(content, gcp_key);
     break;
   default:
     break;
@@ -58,8 +58,8 @@ async function run() {
  */
 async function analyzeSentiments(content, key) {
   if (key) 
-    analyzeSentimentsOnGCP(content, key); 
-  else analyzeSentimentsAFINN165(content);
+    return await analyzeSentimentsOnGCP(content, key); 
+  return analyzeSentimentsAFINN165(content);
 }
 
 /**
