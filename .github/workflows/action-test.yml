@@ -27,4 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - name: Check sentiment
+        uses: ./
+        id: sentiments
+      - name: Echo sentiment
+        run: > 
+          echo 'Sentiment: ${{steps.sentiments.outputs.sentiment}}'
+          echo 'Source: ${{steps.sentiments.outputs.source}}'
+          echo 'Negative words: ${{steps.sentiments.outputs.negative}}'
