@@ -1,5 +1,5 @@
 name: 'testing workflow'
-# Trigger on release
+
 on: 
   issue_comment:
     types: 
