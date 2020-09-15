@@ -3,7 +3,7 @@ module.exports =
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 4822:
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const core = __webpack_require__(2186);
 const axios = __webpack_require__(6545);
@@ -11,17 +11,33 @@ const Sentiment = __webpack_require__(2047);
 const eventPayload = require(process.env.GITHUB_EVENT_PATH);
 const eventName = process.env.GITHUB_EVENT_NAME;
 const sentiment = new Sentiment();
+module.exports = { processingEvent };
 
 async function run() {
+  let url, result;
+
+  try {
+    [url, result] = await processingEvent(eventName, eventPayload);
+  } catch (e) {
+    console.log(e);
+  }
+  
+  if (!result) return null;
+  core.setOutput('source', url);
+  core.setOutput('sentiment', result.score);
+  if (result.negative) core.setOutput('negative', result.negative);
+}
+
+async function processingEvent(eventName, eventPayload) {
   let content, url, result;
   const gcp_key = process.env.GCP_KEY || core.getInput('gcp_key');
-  
+
   switch (eventName) {
   case 'issues':
     content = eventPayload.issue.body;
     url = eventPayload.issue.html_url;
     result = content && await analyzeSentiments(content, gcp_key);
-
+  
     break;
   case 'issue_comment':
   case 'pull_request_review_comment':
@@ -40,13 +56,10 @@ async function run() {
     result = content && await analyzeSentiments(content, gcp_key);
     break;
   default:
-    break;
+    console.log('Only the following events are supported by the action: issues, issue_comment, pull_request_review_comment, pull_request, pull_request_review');
   }
-  
-  if (!result) return null;
-  core.setOutput('source', url);
-  core.setOutput('sentiment', result.score);
-  if (result.negative) core.setOutput('negative', result.negative);
+
+  return [url, result];
 }
 
 /**
@@ -85,6 +98,8 @@ function analyzeSentimentsAFINN165(content) {
  * @returns {Object} object with score parameter
  */
 async function analyzeSentimentsOnGCP(content, key) {
+  let res;
+
   const request = {
     method: 'post',
     url: `https://language.googleapis.com/v1/documents:analyzeSentiment?key=${ key }`,
@@ -99,11 +114,14 @@ async function analyzeSentimentsOnGCP(content, key) {
       }
     }
   };
-
-  const res = await axios(request).catch(e => {
+  
+  try {
+    res = await axios(request);
+  } catch (e) {
     throw new Error(e.response.status === 400 ? 'Please provide a correct API key in GitHub Repository Secrets with key GCP_KEY' : e.message);
-  });
-  core.debug(`Full GCP response: ${ res.data }`);
+  }
+
+  core.debug(`Full GCP response: ${ JSON.stringify(res.data) }`);
   return { score: res.data.documentSentiment.score };
 };
 

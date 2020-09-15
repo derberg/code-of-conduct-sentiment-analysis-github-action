@@ -21,15 +21,6 @@ on:
   
 jobs:
 
-  autoapprove:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Autoapproving
-        uses: hmarr/auto-approve-action@v2.0.0
-        if: github.actor == 'github-action'
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-
   automerge:
     needs: [autoapprove]
     runs-on: ubuntu-latest

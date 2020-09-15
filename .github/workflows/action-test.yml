@@ -42,4 +42,4 @@ jobs:
         with:
           webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
           text: Here ${{steps.sentiments.outputs.source}} you can find a potential negative text that requires your attention as the sentiment analysis score is ${{steps.sentiments.outputs.sentiment}}
-          color: failure
+          color: orange
