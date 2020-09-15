@@ -22,7 +22,6 @@ on:
 jobs:
 
   automerge:
-    needs: [autoapprove]
     runs-on: ubuntu-latest
     steps:
       - name: Automerging
