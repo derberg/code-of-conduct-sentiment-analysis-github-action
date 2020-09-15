@@ -37,3 +37,9 @@ jobs:
           echo 'Sentiment: ${{steps.sentiments.outputs.sentiment}}'
           echo 'Source: ${{steps.sentiments.outputs.source}}'
           echo 'Negative words: ${{steps.sentiments.outputs.negative}}'
+      - uses: someimportantcompany/github-actions-slack-message@v1
+        if: steps.sentiments.outputs.sentiment > 0.2
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          text: Here ${{steps.sentiments.outputs.source}} you can find a potential negative text that requires your attention as the sentiment analysis score is ${{steps.sentiments.outputs.sentiment}}
+          color: failure
