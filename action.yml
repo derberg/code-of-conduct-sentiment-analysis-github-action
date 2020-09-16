@@ -1,5 +1,5 @@
 name: 'Code of conduct compliance through sentiments analysis'
-description: 'Use this action to analyse sentiments in issues and pull request to identify emotions that need to be checked agains the Code of Conduct.'
+description: 'Analyze sentiments in issues and PRs to identify negative content that may violate your code of conduct.'
 inputs:
   gcp_key:
     description: 'Google Cloud Platform API key for accessing the analyzeSentiment API. If not provided, then default sentiment analysis is performed.'

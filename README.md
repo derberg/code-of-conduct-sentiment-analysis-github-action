@@ -64,7 +64,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Check sentiment
-        uses: derberg/code-of-conduct-sentiment-analysis-github-action@v1.0.0
+        uses: derberg/code-of-conduct-sentiment-analysis-github-action@v1
         id: sentiments
       - name: Echo sentiment
         run: > 
@@ -109,7 +109,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Check sentiment
-        uses: ./
+        uses: derberg/code-of-conduct-sentiment-analysis-github-action@v1
         id: sentiments
         with:
           # you can find an instruction on how to setup Google project with access to Natural Language API here https://github.com/BogDAAAMN/copy-sentiment-analysis#gcp_key-get-your-gcp-api-key
@@ -156,7 +156,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Check sentiment
-        uses: ./
+        uses: derberg/code-of-conduct-sentiment-analysis-github-action@v1
         id: sentiments
         with:
           # you can find an instruction on how to setup Google project with access to Natural Language API here https://github.com/BogDAAAMN/copy-sentiment-analysis#gcp_key-get-your-gcp-api-key
