@@ -28,7 +28,7 @@ jobs:
         uses: pascalgn/automerge-action@v0.7.5
         if: github.actor == 'github-action'
         env:
-          GITHUB_TOKEN: "${{ secrets.GH_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           GITHUB_LOGIN: github-action
           MERGE_LABELS: ""
           MERGE_METHOD: "squash"
