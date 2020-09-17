@@ -16,23 +16,23 @@
 
 ## Overview
 
-Use this action to analyze sentiments in issues and pull request to identify emotions that need to be checked against the Code of Conduct.
-This action only analyzes sentiments. Alone it is not very useful as it is just able log the sentiment on GitHub Actions log level. It is intended to be used with other Github Actions.
-Example use case could be run this action and then send the results to Slack with another action.
+Use this action to analyze sentiments in issues and pull requests to identify emotions that need to be checked against the Code of Conduct.
+This action only analyzes sentiments. Alone it is not very useful as it is just able to log the sentiment on GitHub Actions log level. It is intended to be used with other Github Actions.
+An example use case could be run this action and then send the results to Slack with another action.
 
 ### Why this action requires other actions? 
 
-It is because it "only" analyzes the sentiment, but it is up to you to decide in the workflow setup what is the negative sentiment for you, what score you consider as something you should react on.
+It is because it "only" analyzes the sentiment, but it is up to you to decide in the workflow setup the negative sentiment for you and what score you consider as something you should react on.
 
-### How sentiments are analized
+### How sentiments are analyzed
 
-This action can analize sentiments using two different solutions: built-in and 3rd party. Out of the box this action is integrated with [sentiment](https://www.npmjs.com/package/sentiment) package to do analitics based on [AFINN](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html) wordlist. Insted of such a basic analitics, better use this action to communicate with [Google Natural Language API](https://cloud.google.com/natural-language/docs/basics).
+This action can analyze sentiments using two different solutions: built-in and 3rd party. Out of the box, this action is integrated with [sentiment](https://www.npmjs.com/package/sentiment) package to do analytics based on [AFINN](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html) wordlist. Instead of such basic analytics, better use this action to communicate with [Google Natural Language API](https://cloud.google.com/natural-language/docs/basics).
 
 ## Examples
 
 ### Basic example using AFINN wordlist
 
-Below you can find a basic example of how you can use the action without any other actions. It analizes the sentiment and puts the information the the logs.
+Below you can find a basic example of how you can use the action without any other actions. It analyzes the sentiment and puts the information in the logs.
 
 ```yaml
 name: 'Sentiment analysis'
@@ -75,9 +75,10 @@ jobs:
 
 ### Basic example using Google Natural Language API
 
-Below you can find a basic example of how you can use the action with Google API. It analizes the sentiment and puts the information the the logs. Google API key should be stored in [GitHub secrets](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) under `GCP_KEY` name.
+Below you can find a basic example of how you can use the action with Google API. It analyzes the sentiment and puts the information in the logs. Google API key should be stored in [GitHub secrets](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) under `GCP_KEY` name.
 
-Google API is [not expensive](https://cloud.google.com/natural-language/pricing). It is free up to 5k requests, and 1$ up to 1m requests.
+Google API is [not expensive](https://cloud.google.com/natural-language/pricing). It is free up to 5k requests and 1$ up to 1m requests.
+
 
 ```yaml
 name: 'Sentiment analysis'
@@ -123,7 +124,7 @@ jobs:
 
 ### Example using Google API and Slack action
 
-Below example shows how you can use this action with other actions. In this case it is a Slack action that you can use to send information about the sentiment to specific Slack channel.
+The below example shows how you can use this action with other actions. In this case, you can use a Slack action to send information about the sentiment to a specific Slack channel.
 
 ```yaml
 name: 'testing workflow'
@@ -174,7 +175,7 @@ jobs:
 
 ## Troubleshooting
 
-You can enable more log information in GitHub Action by adding `ACTIONS_STEP_DEBUG` secret to repository where you want to use this action. Set the value of this secret to `true` and you'll notice more debug logs from this action.
+You can enable more log information in GitHub Action by adding `ACTIONS_STEP_DEBUG` secret to the repository where you want to use this action. Set the value of this secret to `true`, and you'll notice more debug logs from this action.
 
 ## Development
 
